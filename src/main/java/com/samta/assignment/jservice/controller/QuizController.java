@@ -1,7 +1,6 @@
 package com.samta.assignment.jservice.controller;
 
 import com.samta.assignment.jservice.entity.Question;
-import com.samta.assignment.jservice.service.IQuestionService;
 import com.samta.assignment.jservice.service.impl.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

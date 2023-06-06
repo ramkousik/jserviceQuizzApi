@@ -1,27 +1,35 @@
 package com.samta.assignment.jservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "questions")
 public class Question {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String answer;
     private String question;
-    private int value;
-    private Timestamp airdate;
-    private Timestamp created_at;
-    private Timestamp updated_at;
-    private int category_id;
-    private int game_id;
+    private Long value;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime airdate;
+    private OffsetDateTime created_at;
+    private OffsetDateTime updated_at;
+    @Column(insertable = false, updatable = false)
+    private Long category_id;
+    private Integer game_id;
     private Integer invalid_count;
-    private String category_title;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
 
     public Long getId() {
         return id;
@@ -47,51 +55,51 @@ public class Question {
         this.question = question;
     }
 
-    public int getValue() {
+    public Long getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Long value) {
         this.value = value;
     }
 
-    public Timestamp getAirdate() {
+    public LocalDateTime getAirdate() {
         return airdate;
     }
 
-    public void setAirdate(Timestamp airdate) {
+    public void setAirdate(LocalDateTime airdate) {
         this.airdate = airdate;
     }
 
-    public Timestamp getCreated_at() {
+    public OffsetDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Timestamp created_at) {
+    public void setCreated_at(OffsetDateTime  created_at) {
         this.created_at = created_at;
     }
 
-    public Timestamp getUpdated_at() {
+    public OffsetDateTime getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
+    public void setUpdated_at(OffsetDateTime updated_at) {
         this.updated_at = updated_at;
     }
 
-    public int getCategory_id() {
+    public Long getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(int category_id) {
+    public void setCategory_id(Long category_id) {
         this.category_id = category_id;
     }
 
-    public int getGame_id() {
+    public Integer getGame_id() {
         return game_id;
     }
 
-    public void setGame_id(int game_id) {
+    public void setGame_id(Integer game_id) {
         this.game_id = game_id;
     }
 
@@ -103,12 +111,12 @@ public class Question {
         this.invalid_count = invalid_count;
     }
 
-    public String getCategory_title() {
-        return category_title;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_title(String category_title) {
-        this.category_title = category_title;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
 
